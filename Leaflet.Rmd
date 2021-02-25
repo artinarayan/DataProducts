@@ -1,0 +1,46 @@
+---
+title: "Starbucks Locations in Seattle"
+author: "A Kannankeril"
+date: "2/24/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE,message = FALSE)
+```
+
+The map shows Starbucks locations in Seattle in clusters [Starbucks Locations Dataset](https://www.kaggle.com/starbucks/store-locations). 
+
+- Clicking on the clusters shows individual locations when appropriate. 
+- Hovering on the location, shows the address.
+
+```{r libraries, echo=FALSE}
+library(leaflet)
+library(htmltools)
+library(tidyverse)
+starbucksdf<-read.csv("directory.csv",header = TRUE,sep=",")
+seattle_SB_df<-starbucksdf %>%
+      filter(City=="Seattle")
+```
+
+
+```{r maps}
+
+
+images <- "./Coffee.jpg"
+
+coffee<-makeIcon(
+      iconUrl = images,
+      iconWidth = 31*215/230, iconHeight = 31,
+      iconAnchorX = 31*215/230/2, iconAnchorY = 16
+)
+
+my_map <- seattle_SB_df %>%
+      leaflet() %>%
+      addTiles() %>%
+      addMarkers(~Longitude,~Latitude,label=~htmlEscape(Street.Address),clusterOptions = markerClusterOptions(),icon=coffee)
+my_map
+
+
+```
+
