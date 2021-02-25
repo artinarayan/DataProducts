@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE,message = FALSE)
 ```
 
-The map shows Starbucks locations in Seattle in clusters [Starbucks Locations Dataset](https://www.kaggle.com/starbucks/store-locations). 
+The map shows Starbucks locations in Seattle in clusters [Kaggle Starbucks Locations Dataset](https://www.kaggle.com/starbucks/store-locations). 
 
 - Clicking on the clusters shows individual locations when appropriate. 
 - Hovering on the location, shows the address.
