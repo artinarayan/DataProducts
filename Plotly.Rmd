@@ -1,0 +1,35 @@
+---
+title: "Plotly"
+author: "A Kannankeril"
+date: "3/01/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+## Life Expectancy vs. GDP using Plotly
+
+
+```{r libraries, echo=FALSE}
+library(plotly)
+library(tidyverse)
+library(datasets)
+library(gapminder)
+```
+
+
+
+```{r plot}
+
+fig <- gapminder %>%
+      plot_ly(x = ~gdpPercap, y = ~lifeExp, 
+              text = ~country,
+              hoverinfo="text",
+              size = ~pop) %>%
+      layout(xaxis = list(type = "log")) %>%
+      add_markers(color = ~continent, frame = ~year)
+fig
+```
+
