@@ -24,7 +24,7 @@ top_univ<-top_hundred %>%
       arrange(year,ranking)
 ```
 ## Plotly graph code
-Below is the plotly code for scatter graph for top 100 universities that shows their citations and rankings. 
+Below is the plotly code for scatter graph for top 100 universities that shows the number of citations and their rankings. [World Universities Data](https://www.kaggle.com/mylesoneill/world-university-rankings?select=timesData.csv)
 
 ```{r code, eval=FALSE}
 fig <- top_univ %>%
@@ -38,7 +38,7 @@ Use the right arrow to view the next slide.
 
 ## Citations vs. Ranking 
 Slide or Play to see top universities over the years for each country listed. Hover over the data points to see the university.
-[World Universities Data](https://www.kaggle.com/mylesoneill/world-university-rankings?select=timesData.csv)
+
 
 ```{r plot,echo=FALSE,fig.height=4}
 fig <- top_univ %>%
