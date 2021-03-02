@@ -1,14 +1,14 @@
 ---
-title: "Top 100 World Universities - Citations vs. Ranking"
+title: "Presentation with Plotly"
 author: "A Kannankeril"
-date: "3/01/2021"
-output: html_document
+date: "3/1/2021"
+output: ioslides_presentation
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
-Slide or Play to see top universities over the years for each country listed. Hover over the data points to see the university.
+
 
 ```{r libraries, echo=FALSE}
 library(tidyverse)
@@ -26,9 +26,10 @@ top_univ<-top_hundred %>%
       arrange(year,ranking)
 ```
 
+## Citations vs. Ranking
+Slide or Play to see top universities over the years for each country listed. Hover over the data points to see the university.
 
-
-```{r plot}
+```{r plot,echo=FALSE}
 fig <- top_univ %>%
       plot_ly(y = ~citations, x = ~ranking,
               text=~university_name, hoverinfo="text") %>%
@@ -36,4 +37,4 @@ fig <- top_univ %>%
                         colors=mycolors,frame = ~year)
 fig
 ```
-[World Universities Ranking](https://www.kaggle.com/mylesoneill/world-university-rankings?select=timesData.csv)
+
