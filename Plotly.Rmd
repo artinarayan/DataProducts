@@ -1,5 +1,5 @@
 ---
-title: "Life Expectancy vs. GDP using Plotly"
+title: "Top 100 World Universities - Citations vs. Ranking"
 author: "A Kannankeril"
 date: "3/01/2021"
 output: html_document
@@ -8,23 +8,32 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
-
+Slide or Play to see top universities over the years for each country listed. Hover over the data points to see the university.
 
 ```{r libraries, echo=FALSE}
-library(plotly)
 library(tidyverse)
-library(datasets)
-library(gapminder)
+library(plotly)
+library(RColorBrewer)
+mycolors<-colorRampPalette(brewer.pal(8, "Set2"))(18)
+world_univ<-read.csv("timesData.csv",header = T,sep = ",")
+
+ 
+top_hundred<- world_univ %>%
+            mutate(ranking=as.numeric(gsub("=", "", as.character(world_rank))))
+
+top_univ<-top_hundred %>%
+      filter(ranking<=100) %>%
+      arrange(year,ranking)
 ```
 
 
 
 ```{r plot}
-fig <- gapminder %>%
-      plot_ly(x = ~gdpPercap, y = ~lifeExp, size = ~pop,
-              text = ~country, hoverinfo="text") %>%
-      layout(xaxis = list(type = "log")) %>%
-      add_markers(color = ~continent, frame = ~year)
+fig <- top_univ %>%
+      plot_ly(y = ~citations, x = ~ranking,
+              text=~university_name, hoverinfo="text") %>%
+            add_markers(color = ~country, 
+                        colors=mycolors,frame = ~year)
 fig
 ```
-
+[World Universities Ranking](https://www.kaggle.com/mylesoneill/world-university-rankings?select=timesData.csv)
