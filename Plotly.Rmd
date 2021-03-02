@@ -16,8 +16,6 @@ library(plotly)
 library(RColorBrewer)
 mycolors<-colorRampPalette(brewer.pal(8, "Set2"))(18)
 world_univ<-read.csv("timesData.csv",header = T,sep = ",")
-
- 
 top_hundred<- world_univ %>%
             mutate(ranking=as.numeric(gsub("=", "", as.character(world_rank))))
 
@@ -25,11 +23,22 @@ top_univ<-top_hundred %>%
       filter(ranking<=100) %>%
       arrange(year,ranking)
 ```
+## Code
+```{r code, eval=FALSE}
+fig <- top_univ %>%
+      plot_ly(y = ~citations, x = ~ranking,
+              text=~university_name, hoverinfo="text") %>%
+            add_markers(color = ~country, 
+                        colors=mycolors,frame = ~year)
+fig
+```
+Right arrow to view the next slide.
 
-## Citations vs. Ranking
+## Citations vs. Ranking 
 Slide or Play to see top universities over the years for each country listed. Hover over the data points to see the university.
+[World Universities Data](https://www.kaggle.com/mylesoneill/world-university-rankings?select=timesData.csv)
 
-```{r plot,echo=FALSE}
+```{r plot,echo=FALSE,fig.height=4}
 fig <- top_univ %>%
       plot_ly(y = ~citations, x = ~ranking,
               text=~university_name, hoverinfo="text") %>%
