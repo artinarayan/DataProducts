@@ -40,7 +40,7 @@ Use the right arrow to view the next slide.
 Slide or Play to see top universities over the years for each country listed. Hover over the data points to see the university.
 
 
-```{r plot,echo=FALSE,fig.height=4}
+```{r plot,echo=FALSE}
 fig <- top_univ %>%
       plot_ly(y = ~citations, x = ~ranking,
               text=~university_name, hoverinfo="text") %>%
